@@ -17,20 +17,19 @@ class DesafioUno {
         $cobrar['data']['detail']    = [];
 
 
-
         foreach($lotes as $lote){
 
         
-            if($lote->vencimiento || $lote->vencimiento > date('Y-m-d')) continue;
+            if(is_null($lote->vencimiento) || $lote->vencimiento > date('Y-m-d')) continue;
 
 
-            if($lote->client_ID !== $clientID) continue;
+            if($lote->clientID != $clientID) continue;
             
 
             
             $cobrar['status']             = false;
             $cobrar['message']            = 'Tienes Lotes para cobrar';
-            $cobrar['data']['total']     += $lote->monto;
+            $cobrar['data']['total']     += $lote->precio;
             $cobrar['data']['detail'][]   = (array) $lote;
  
         }
